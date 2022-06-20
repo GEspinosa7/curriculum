@@ -19,11 +19,11 @@ const login = async (req, res) => {
 
         return res.status(200).json({ admin: adminData, token })
     } catch (error) {
-        return res.status(400).json({ erro: error.message });
+        return res.status(400).json({ error: error.message });
     }
 };
 
-const signUp = async (req, res) => {
+const createAdmin = async (req, res) => {
     const { email, pass } = req.body;
 
     try {
@@ -39,9 +39,8 @@ const signUp = async (req, res) => {
 
         return res.status(200).json(adminData);
     } catch (error) {
-        return res.status(400).json({ erro: error.message });
+        return res.status(400).json({ error: error.message });
     }
-
 };
 
-module.exports = { login, signUp };
+module.exports = { login, createAdmin };

@@ -3,7 +3,9 @@ CREATE DATABASE curriculum;
 CREATE TABLE IF NOT EXISTS admin_user(
     id SERIAL NOT NULL PRIMARY KEY,
     email VARCHAR(100) NOT NULL,
-    pass TEXT NOT NULL
+    pass TEXT NOT NULL,
+    persona_id INTEGER NOT NULL,
+    FOREIGN KEY(persona_id) REFERENCES persona(id) 
 );
 
 CREATE TABLE IF NOT EXISTS skills (
@@ -81,20 +83,21 @@ CREATE TABLE IF NOT EXISTS persona(
     city VARCHAR(100),
     country VARCHAR(100),
     job VARCHAR(120),
-    about TEXT,
-    skills_id INTEGER NOT NULL,
+    about TEXT, 
+  	cpf TEXT NOT NULL UNIQUE,
+    skills_id INTEGER,
     FOREIGN KEY(skills_id) REFERENCES skills(id), 	
-    languages_id INTEGER NOT NULL,
+    languages_id INTEGER,
     FOREIGN KEY(languages_id) REFERENCES languages(id), 	
-    certificates_id INTEGER NOT NULL,
+    certificates_id INTEGER,
     FOREIGN KEY(certificates_id) REFERENCES certificates(id), 	
-    academic_degrees_id INTEGER NOT NULL,
+    academic_degrees_id INTEGER,
     FOREIGN KEY(academic_degrees_id) REFERENCES academic_degrees(id), 	
-    experience_id INTEGER NOT NULL,
+    experience_id INTEGER,
     FOREIGN KEY(experience_id) REFERENCES experience(id),
-    projects_id INTEGER NOT NULL,
+    projects_id INTEGER,
     FOREIGN KEY(projects_id) REFERENCES projects(id),
-    contact_id INTEGER NOT NULL,
+    contact_id INTEGER,
     FOREIGN KEY(contact_id) REFERENCES contact(id)   	
 );
 
