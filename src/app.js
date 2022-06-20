@@ -1,11 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
+const router = require('./routes');
 
 const app = express();
 
 app.use(express.json({ limit: '5mb' }));
-
-app.get('/test', (req, res) => {
-    return res.status(200).json({ test: true })
-})
+app.use(router);
 
 app.listen(process.env.PORT || 5500);
