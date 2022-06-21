@@ -1,13 +1,14 @@
 const knex = require('../database/connection');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const schemaAdmin = require('../validations/schemas/schemaAdmin');
 
 const login = async (req, res) => {
     const { email, pass } = req.body;
 
-    if (!email || !pass) return res.status(400).json({ error: "empty values" })
-
     try {
+        await schemaAdmin.validate(req.body);
+
         const admin = await knex('admin_user').where({ email }).first();
         if (!admin) return res.status(404).json({ error: "User not found!" });
 
@@ -27,6 +28,8 @@ const createAdmin = async (req, res) => {
     const { email, pass } = req.body;
 
     try {
+        await schemaAdmin.validate(req.body);
+
         const adminFound = await knex("admin_user").where({ email }).first();
         if (adminFound) return res.status(409).json({ erro: "This email is already taken" });
 

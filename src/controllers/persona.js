@@ -1,4 +1,5 @@
 const knex = require('../database/connection');
+const { schemaCreatePersona, schemaUpdatePersona } = require('../validations/schemas/schemaPersona');
 
 const getPersona = async (req, res) => {
     const { cpf } = req.params;
@@ -17,6 +18,8 @@ const createPersona = async (req, res) => {
     const { cpf } = req.body;
 
     try {
+        await schemaCreatePersona.validate(req.body);
+
         const persona = await knex("persona").where({ cpf }).first();
         if (persona) return res.status(404).json({ error: `You can't create another persona with same CPF` });
 
@@ -33,6 +36,8 @@ const updatePersona = async (req, res) => {
     const { cpf } = req.params;
 
     try {
+        await schemaUpdatePersona.validate(req.body);
+
         const persona = await knex("persona").where({ cpf }).first();
         if (!persona) return res.status(404).json({ error: 'Persona not found' });
 
