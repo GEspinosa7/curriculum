@@ -1,5 +1,5 @@
 const knex = require('../database/connection');
-const { findPersona } = require('../utilities/entitiesFinder');
+const { findEntitie } = require('../utilities/entitiesFinder');
 const { error500, error403 } = require('../utilities/errors');
 const { schemaCreatePersona, schemaUpdatePersona } = require('../validations/schemas/schemaPersona');
 
@@ -7,7 +7,7 @@ const getPersona = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const persona = await findPersona(id);
+        const persona = await findEntitie('persona', id);
         if (persona.error) return res.status(404).json({ error: persona.error });
 
         return res.status(200).json(persona)
@@ -38,7 +38,7 @@ const updatePersona = async (req, res) => {
     try {
         await schemaUpdatePersona.validate(req.body);
 
-        const persona = await findPersona(id);
+        const persona = await findEntitie('persona', id);
         if (persona.error) return res.status(404).json({ error: persona.error });
 
         const updatedPersona = await knex('persona').update(req.body).where({ id }).returning('*');
