@@ -1,12 +1,14 @@
 const knex = require('../database/connection');
+const { findPersona } = require('../utilities/entitiesFinder');
+const { error500, error403 } = require('../utilities/errors');
 const { schemaCreatePersona, schemaUpdatePersona } = require('../validations/schemas/schemaPersona');
 
 const getPersona = async (req, res) => {
-    const { cpf } = req.params;
+    const { id } = req.params;
 
     try {
-        const persona = await knex('persona').where({ cpf }).first();
-        if (!persona) return res.status(404).json({ error: "not found" });
+        const persona = await findPersona(id);
+        if (persona.error) return res.status(404).json({ error: persona.error });
 
         return res.status(200).json(persona)
     } catch (error) {
@@ -15,16 +17,14 @@ const getPersona = async (req, res) => {
 }
 
 const createPersona = async (req, res) => {
-    const { cpf } = req.body;
-
     try {
         await schemaCreatePersona.validate(req.body);
 
-        const persona = await knex("persona").where({ cpf }).first();
-        if (persona) return res.status(404).json({ error: `You can't create another persona with same CPF` });
+        const persona = await knex("persona").first();
+        if (persona) return res.status(403).json({ error: error403 });
 
         const newPersona = await knex("persona").insert(req.body).returning('*');
-        if (!newPersona) return res.status(500).json({ erro: 'Something went wrong, please try again' });
+        if (!newPersona) return res.status(500).json({ error: error500 });
 
         return res.status(201).json(newPersona[0]);
     } catch (error) {
@@ -33,32 +33,16 @@ const createPersona = async (req, res) => {
 };
 
 const updatePersona = async (req, res) => {
-    const { cpf } = req.params;
+    const { id } = req.params;
 
     try {
         await schemaUpdatePersona.validate(req.body);
 
-        const persona = await knex("persona").where({ cpf }).first();
-        if (!persona) return res.status(404).json({ error: 'Persona not found' });
+        const persona = await findPersona(id);
+        if (persona.error) return res.status(404).json({ error: persona.error });
 
-        const updatedPersona = await knex('persona').update(req.body).where({ cpf }).returning('*');
-        if (!updatedPersona[0]) return res.status(500).json({ erro: 'Something went wrong, please try again' });
-
-        return res.status(200).json(updatedPersona[0]);
-    } catch (error) {
-        return res.status(400).json({ error: error.message })
-    }
-};
-
-const removePersona = async (req, res) => {
-    const { cpf } = req.params;
-
-    try {
-        const persona = await knex("persona").where({ cpf }).first();
-        if (!persona) return res.status(404).json({ error: 'Persona not found' });
-
-        const { rowCount } = await knex("persona").del().where({ cpf });
-        if (rowCount === 0) return res.status(500).json({ erro: 'Something went wrong, please try again' });
+        const updatedPersona = await knex('persona').update(req.body).where({ id }).returning('*');
+        if (!updatedPersona[0]) return res.status(500).json({ error: error500 });
 
         return res.status(200).json();
     } catch (error) {
@@ -66,4 +50,4 @@ const removePersona = async (req, res) => {
     }
 };
 
-module.exports = { getPersona, createPersona, updatePersona, removePersona }
+module.exports = { getPersona, createPersona, updatePersona }
