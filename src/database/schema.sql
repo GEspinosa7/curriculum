@@ -40,9 +40,7 @@ CREATE TABLE IF NOT EXISTS academic_degrees (
     institution_web_site TEXT DEFAULT NULL,
     ad_start_date DATE NOT NULL,
     ad_end_date DATE DEFAULT NULL,
-    ad_description TEXT, 
-    medias_id INTEGER,
-    FOREIGN KEY(medias_id) REFERENCES medias(id) 
+    ad_description TEXT
 ); 
 
 
@@ -63,9 +61,7 @@ CREATE TABLE IF NOT EXISTS projects (
     id SERIAL NOT NULL PRIMARY KEY,
     title VARCHAR(200),
     p_description TEXT,
-    activities TEXT,
-    medias_id INTEGER,
-    FOREIGN KEY(medias_id) REFERENCES medias(id) 
+    activities TEXT
 ); 
 
 CREATE TABLE IF NOT EXISTS contact (
@@ -91,4 +87,69 @@ CREATE TABLE IF NOT EXISTS persona_skills(
     FOREIGN KEY(skill_id) REFERENCES skills(id),
     persona_id INTEGER NOT NULL,
     FOREIGN KEY(persona_id) REFERENCES persona(id)
+);
+
+CREATE TABLE IF NOT EXISTS persona_languages (
+    id SERIAL NOT NULL PRIMARY KEY,
+    languages_id INTEGER NOT NULL,
+    FOREIGN KEY(languages_id) REFERENCES languages(id),
+    persona_id INTEGER NOT NULL,
+    FOREIGN KEY(persona_id) REFERENCES persona(id)
+); 
+
+CREATE TABLE IF NOT EXISTS persona_certificates (
+    id SERIAL NOT NULL PRIMARY KEY,
+    certificates_id INTEGER NOT NULL,
+    FOREIGN KEY(certificates_id) REFERENCES certificates(id),
+    persona_id INTEGER NOT NULL,
+    FOREIGN KEY(persona_id) REFERENCES persona(id)    
+); 
+
+CREATE TABLE IF NOT EXISTS persona_academic_degrees (
+    id SERIAL NOT NULL PRIMARY KEY,
+    academic_degrees_id INTEGER NOT NULL,
+    FOREIGN KEY(academic_degrees_id) REFERENCES academic_degrees(id),
+    persona_id INTEGER NOT NULL,
+    FOREIGN KEY(persona_id) REFERENCES persona(id)   
+); 
+
+
+CREATE TABLE IF NOT EXISTS persona_experience (
+    id SERIAL NOT NULL PRIMARY KEY,
+    experience_id INTEGER NOT NULL,
+    FOREIGN KEY(experience_id) REFERENCES experience(id),
+    persona_id INTEGER NOT NULL,
+    FOREIGN KEY(persona_id) REFERENCES persona(id)  
+); 
+
+CREATE TABLE IF NOT EXISTS persona_projects (
+    id SERIAL NOT NULL PRIMARY KEY,
+    projects_id INTEGER NOT NULL,
+    FOREIGN KEY(projects_id) REFERENCES projects(id),
+    persona_id INTEGER NOT NULL,
+    FOREIGN KEY(persona_id) REFERENCES persona(id)  
+); 
+
+CREATE TABLE IF NOT EXISTS persona_contact (
+    id SERIAL NOT NULL PRIMARY KEY,
+    contact_id INTEGER NOT NULL,
+    FOREIGN KEY(contact_id) REFERENCES contact(id),
+    persona_id INTEGER NOT NULL,
+    FOREIGN KEY(persona_id) REFERENCES persona(id)  
+);
+
+CREATE TABLE IF NOT EXISTS projects_medias (
+    id SERIAL NOT NULL PRIMARY KEY,
+    medias_id INTEGER NOT NULL,
+    FOREIGN KEY(medias_id) REFERENCES medias(id),
+    projects_id INTEGER NOT NULL,
+    FOREIGN KEY(projects_id) REFERENCES projects(id)  
+);
+
+CREATE TABLE IF NOT EXISTS academic_degrees_medias (
+    id SERIAL NOT NULL PRIMARY KEY,
+    medias_id INTEGER NOT NULL,
+    FOREIGN KEY(medias_id) REFERENCES medias(id),
+    academic_degrees_id INTEGER NOT NULL,
+    FOREIGN KEY(academic_degrees_id) REFERENCES academic_degrees(id)  
 );
