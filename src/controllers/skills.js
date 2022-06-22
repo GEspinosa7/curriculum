@@ -16,7 +16,7 @@ const createPersonaSkill = async (req, res) => {
         const newSkill = await knex('skills').insert({ title }).returning('*');
         if (!newSkill[0]) return res.status(500).json({ error: error500 });
 
-        const personaSkills = await knex('persona_skills').insert({ skill_id: newSkill[0].id, persona_id: personaId }).returning('*');
+        const personaSkills = await knex('persona_skills').insert({ skills_id: newSkill[0].id, persona_id: personaId }).returning('*');
         if (!personaSkills[0]) return res.status(500).json({ error: error500 });
 
         return res.status(201).json(personaSkills[0]);
