@@ -1,5 +1,6 @@
 const express = require('express');
 const { login, createAdmin } = require('./controllers/admin');
+const { createPersonaLanguage, updatePersonaLanguage, getPersonaLanguage, getPersonaLanguageList, removePersonaLanguage } = require('./controllers/languages');
 const { getPersona, createPersona, updatePersona } = require('./controllers/persona');
 const { createPersonaSkill, getPersonaSkill, getPersonaSkillList, removePersonaSkill, updatePersonaSkill } = require('./controllers/skills');
 const loginAuth = require('./filters/login');
@@ -15,14 +16,20 @@ router.get('/test', (req, res) => {
 
 router.use(loginAuth);
 
-router.get('/persona/:id', getPersona);
 router.post('/persona', createPersona);
+router.get('/persona/:id', getPersona);
 router.put('/persona/:id', updatePersona);
 
-router.post('/skill', createPersonaSkill);
-router.get('/skill/:personaId/:id', getPersonaSkill);
-router.get('/skill/:personaId', getPersonaSkillList);
-router.put('/skill/:personaId/:id', updatePersonaSkill);
-router.delete('/skill/:personaId/:id', removePersonaSkill);
+router.post('/skills', createPersonaSkill);
+router.get('/skills/:personaId', getPersonaSkillList);
+router.get('/skills/:personaId/:skillId', getPersonaSkill);
+router.put('/skills/:personaId/:skillId', updatePersonaSkill);
+router.delete('/skills/:personaId/:skillId', removePersonaSkill);
+
+router.post('/languages', createPersonaLanguage);
+router.get('/languages/:personaId', getPersonaLanguageList);
+router.get('/languages/:personaId/:languageId', getPersonaLanguage);
+router.put('/languages/:personaId/:languageId', updatePersonaLanguage);
+router.delete('/languages/:personaId/:languageId', removePersonaLanguage);
 
 module.exports = router;

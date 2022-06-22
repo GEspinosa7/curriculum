@@ -1,10 +1,10 @@
 const knex = require('../database/connection');
 const { error404 } = require('./errors');
 
-const findEntitie = async (entitie, id) => {
+const findEntitie = async (entitieName, id) => {
     try {
-        const result = await knex(`${entitie}`).where({ id }).first();
-        if (!result) return { error: error404(`${entitie}`) };
+        const result = await knex(`${entitieName}`).where({ id }).first();
+        if (!result) return { error: error404(`${entitieName.substring(0, entitieName.length - 1)}`) };
 
         return result;
     } catch (error) {
@@ -19,7 +19,7 @@ const findPersonaEntitie = async (personaId, entitieName, entitieId) => {
             .andWhere(`${entitieName}_id`, entitieId)
             .first();
 
-        if (!personaEntitie) return { error: error404(`${entitieName}`) };
+        if (!personaEntitie) return { error: error404(`${entitieName.substring(0, entitieName.length - 1)}`) };
 
         return personaEntitie;
     } catch (error) {
