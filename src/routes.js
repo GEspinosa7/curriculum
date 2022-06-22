@@ -3,6 +3,7 @@ const { login, createAdmin } = require('./controllers/admin');
 const { createPersonaContact, getPersonaContactList, updatePersonaContact, removePersonaContact, getPersonaContact } = require('./controllers/contacts');
 const { createPersonaLanguage, updatePersonaLanguage, getPersonaLanguage, getPersonaLanguageList, removePersonaLanguage } = require('./controllers/languages');
 const { getPersona, createPersona, updatePersona } = require('./controllers/persona');
+const { createPersonaProject, getPersonaProjectList, getPersonaProject, updatePersonaProject, removePersonaProject } = require('./controllers/projects');
 const { createPersonaSkill, getPersonaSkill, getPersonaSkillList, removePersonaSkill, updatePersonaSkill } = require('./controllers/skills');
 const loginAuth = require('./filters/login');
 
@@ -38,5 +39,11 @@ router.get('/contacts/:personaId', getPersonaContactList);
 router.get('/contacts/:personaId/:contactId', getPersonaContact);
 router.put('/contacts/:personaId/:contactId', updatePersonaContact);
 router.delete('/contacts/:personaId/:contactId', removePersonaContact);
+
+router.post('/projects', createPersonaProject);
+router.get('/projects/:personaId', getPersonaProjectList);
+router.get('/projects/:personaId/:projectId', getPersonaProject);
+router.put('/projects/:personaId/:projectId', updatePersonaProject);
+router.delete('/projects/:personaId/:projectId', removePersonaProject);
 
 module.exports = router;
