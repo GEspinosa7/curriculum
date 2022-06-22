@@ -12,15 +12,19 @@ const findEntitie = async (entitie, id) => {
     }
 }
 
-const findPersonaSkill = async (personaId, skill_id) => {
+const findPersonaEntitie = async (personaId, entitieName, entitieId) => {
     try {
-        const personaSkill = await knex('persona_skills').where({ skill_id, persona_id: personaId }).first();
-        if (!personaSkill) return { error: error404('Skill') };
+        const personaEntitie = await knex(`persona_${entitieName}`)
+            .where('persona_id', personaId)
+            .andWhere(`${entitieName}_id`, entitieId)
+            .first();
 
-        return personaSkill;
+        if (!personaEntitie) return { error: error404(`${entitieName}`) };
+
+        return personaEntitie;
     } catch (error) {
         return { error: error.message };
     }
 }
 
-module.exports = { findPersonaSkill, findEntitie };
+module.exports = { findPersonaEntitie, findEntitie };

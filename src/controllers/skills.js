@@ -1,5 +1,5 @@
 const knex = require('../database/connection');
-const { findPersonaSkill, findEntitie } = require('../utilities/entitiesFinder');
+const { findEntitie, findPersonaEntitie } = require('../utilities/entitiesFinder');
 const { error500, error404 } = require('../utilities/errors');
 const { schemaUpdateSkill, schemaCreateSkill } = require('../validations/schemas/schemaSkill');
 
@@ -34,10 +34,10 @@ const updatePersonaSkill = async (req, res) => {
         const persona = await findEntitie('persona', personaId);
         if (persona.error) return res.status(404).json({ error: persona.error });
 
-        const personaSkill = await findPersonaSkill(personaId, skillId);
+        const personaSkill = await findPersonaEntitie(personaId, 'skills', skillId);
         if (personaSkill.error) return res.status(404).json({ error: personaSkill.error });
 
-        const updatedSkill = await knex('skills').update(req.body).where({ id: personaSkill.skill_id }).returning('*');
+        const updatedSkill = await knex('skills').update(req.body).where({ id: personaSkill.skills_id }).returning('*');
         if (!updatedSkill[0]) return res.status(500).json({ error: error500 });
 
         return res.status(200).json(updatedSkill[0]);
@@ -72,7 +72,7 @@ const getPersonaSkillList = async (req, res) => {
         const skills = await knex('persona_skills')
             .join(
                 'skills',
-                'persona_skills.skill_id',
+                'persona_skills.skills_id',
                 '=',
                 'skills.id')
             .select(
@@ -83,7 +83,7 @@ const getPersonaSkillList = async (req, res) => {
                 'persona_skills.id',
                 'skills.id',
                 'skills.title'
-            ).where({ persona_id: personaId });
+            ).where('persona_id', personaId);
 
         if (!skills) return res.status(404).json({ error: error404('Skill list') });
 
@@ -100,10 +100,11 @@ const removePersonaSkill = async (req, res) => {
         const persona = await findEntitie('persona', personaId);
         if (persona.error) return res.status(404).json({ error: persona.error });
 
-        const personaSkill = await findPersonaSkill(personaId, skillId);
+
+        const personaSkill = await findPersonaEntitie(personaId, 'skills', skillId);
         if (personaSkill.error) return res.status(404).json({ error: personaSkill.error });
 
-        const { rowCount } = await knex("persona_skills").del().where({ skill_id: skillId });
+        const { rowCount } = await knex("persona_skills").del().where({ skills_id: skillId });
         if (rowCount === 0) return res.status(500).json({ error: error500 });
 
         return res.status(200).json();
