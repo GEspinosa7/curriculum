@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS projects (
     activities TEXT
 ); 
 
-CREATE TABLE IF NOT EXISTS contact (
+CREATE TABLE IF NOT EXISTS contacts (
     id SERIAL NOT NULL PRIMARY KEY,
     title VARCHAR(150),
     link TEXT
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS persona_projects (
     FOREIGN KEY(persona_id) REFERENCES persona(id)  
 ); 
 
-CREATE TABLE IF NOT EXISTS persona_contact (
+CREATE TABLE IF NOT EXISTS persona_contacts (
     id SERIAL NOT NULL PRIMARY KEY,
     contact_id INTEGER NOT NULL,
     FOREIGN KEY(contact_id) REFERENCES contact(id),

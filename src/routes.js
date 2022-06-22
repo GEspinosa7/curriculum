@@ -1,5 +1,6 @@
 const express = require('express');
 const { login, createAdmin } = require('./controllers/admin');
+const { createPersonaContact, getPersonaContactList, updatePersonaContact, removePersonaContact, getPersonaContact } = require('./controllers/contact');
 const { createPersonaLanguage, updatePersonaLanguage, getPersonaLanguage, getPersonaLanguageList, removePersonaLanguage } = require('./controllers/languages');
 const { getPersona, createPersona, updatePersona } = require('./controllers/persona');
 const { createPersonaSkill, getPersonaSkill, getPersonaSkillList, removePersonaSkill, updatePersonaSkill } = require('./controllers/skills');
@@ -31,5 +32,11 @@ router.get('/languages/:personaId', getPersonaLanguageList);
 router.get('/languages/:personaId/:languageId', getPersonaLanguage);
 router.put('/languages/:personaId/:languageId', updatePersonaLanguage);
 router.delete('/languages/:personaId/:languageId', removePersonaLanguage);
+
+router.post('/contacts', createPersonaContact);
+router.get('/contacts/:personaId', getPersonaContactList);
+router.get('/contacts/:personaId/:contactId', getPersonaContact);
+router.put('/contacts/:personaId/:contactId', updatePersonaContact);
+router.delete('/contacts/:personaId/:contactId', removePersonaContact);
 
 module.exports = router;
