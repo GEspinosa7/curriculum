@@ -2,6 +2,7 @@ const express = require('express');
 const { login, createAdmin } = require('./controllers/admin');
 const { createPersonaCertificate, getPersonaCertificateList, getPersonaCertificate, updatePersonaCertificate, removePersonaCertificate } = require('./controllers/certificates');
 const { createPersonaContact, getPersonaContactList, updatePersonaContact, removePersonaContact, getPersonaContact } = require('./controllers/contacts');
+const { createPersonaExperience, getPersonaExperience, getPersonaExperienceList, updatePersonaExeperience, removePersonaExperience } = require('./controllers/experciences');
 const { createPersonaLanguage, updatePersonaLanguage, getPersonaLanguage, getPersonaLanguageList, removePersonaLanguage } = require('./controllers/languages');
 const { getPersona, createPersona, updatePersona } = require('./controllers/persona');
 const { createPersonaProject, getPersonaProjectList, getPersonaProject, updatePersonaProject, removePersonaProject } = require('./controllers/projects');
@@ -52,5 +53,11 @@ router.get('/projects/:personaId', getPersonaProjectList);
 router.get('/projects/:personaId/:projectId', getPersonaProject);
 router.put('/projects/:personaId/:projectId', updatePersonaProject);
 router.delete('/projects/:personaId/:projectId', removePersonaProject);
+
+router.post('/experiences', createPersonaExperience);
+router.get('/experiences/:personaId', getPersonaExperienceList);
+router.get('/experiences/:personaId/:experienceId', getPersonaExperience);
+router.put('/experiences/:personaId/:experienceId', updatePersonaExeperience);
+router.delete('/experiences/:personaId/:experienceId', removePersonaExperience);
 
 module.exports = router;
