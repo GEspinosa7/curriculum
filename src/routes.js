@@ -1,5 +1,6 @@
 const express = require('express');
 const { login, createAdmin } = require('./controllers/admin');
+const { createPersonaCertificate, getPersonaCertificateList, getPersonaCertificate, updatePersonaCertificate, removePersonaCertificate } = require('./controllers/certificates');
 const { createPersonaContact, getPersonaContactList, updatePersonaContact, removePersonaContact, getPersonaContact } = require('./controllers/contacts');
 const { createPersonaLanguage, updatePersonaLanguage, getPersonaLanguage, getPersonaLanguageList, removePersonaLanguage } = require('./controllers/languages');
 const { getPersona, createPersona, updatePersona } = require('./controllers/persona');
@@ -39,6 +40,12 @@ router.get('/contacts/:personaId', getPersonaContactList);
 router.get('/contacts/:personaId/:contactId', getPersonaContact);
 router.put('/contacts/:personaId/:contactId', updatePersonaContact);
 router.delete('/contacts/:personaId/:contactId', removePersonaContact);
+
+router.post('/certificates', createPersonaCertificate);
+router.get('/certificates/:personaId', getPersonaCertificateList);
+router.get('/certificates/:personaId/:certificateId', getPersonaCertificate);
+router.put('/certificates/:personaId/:certificateId', updatePersonaCertificate);
+router.delete('/certificates/:personaId/:certificateId', removePersonaCertificate);
 
 router.post('/projects', createPersonaProject);
 router.get('/projects/:personaId', getPersonaProjectList);

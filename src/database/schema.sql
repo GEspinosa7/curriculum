@@ -20,8 +20,7 @@ CREATE TABLE IF NOT EXISTS languages (
 CREATE TABLE IF NOT EXISTS certificates (
     id SERIAL NOT NULL PRIMARY KEY,
     title VARCHAR(150),
-    link TEXT,
-    company VARCHAR(150),
+    institution VARCHAR(150),
     issue_date DATE,
     expiration_date DATE,
     credential_key TEXT,
