@@ -1,4 +1,5 @@
 const express = require('express');
+const { createPersonaAD, getPersonaADList, getPersonaAD, updatePersonaAD, removePersonaAD } = require('./controllers/academicDegrees');
 const { login, createAdmin } = require('./controllers/admin');
 const { createPersonaCertificate, getPersonaCertificateList, getPersonaCertificate, updatePersonaCertificate, removePersonaCertificate } = require('./controllers/certificates');
 const { createPersonaContact, getPersonaContactList, updatePersonaContact, removePersonaContact, getPersonaContact } = require('./controllers/contacts');
@@ -59,5 +60,11 @@ router.get('/experiences/:personaId', getPersonaExperienceList);
 router.get('/experiences/:personaId/:experienceId', getPersonaExperience);
 router.put('/experiences/:personaId/:experienceId', updatePersonaExeperience);
 router.delete('/experiences/:personaId/:experienceId', removePersonaExperience);
+
+router.post('/ad', createPersonaAD);
+router.get('/ad/:personaId', getPersonaADList);
+router.get('/ad/:personaId/:adId', getPersonaAD);
+router.put('/ad/:personaId/:adId', updatePersonaAD);
+router.delete('/ad/:personaId/:adId', removePersonaAD);
 
 module.exports = router;
