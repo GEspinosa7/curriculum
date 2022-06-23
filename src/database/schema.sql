@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS certificates (
 
 CREATE TABLE IF NOT EXISTS medias (
     id SERIAL NOT NULL PRIMARY KEY,
-    link TEXT
+    link TEXT NOT NULL,
+    image_name VARCHAR(150) NOT NULL
 ); 
 
 CREATE TABLE IF NOT EXISTS academic_degrees (
