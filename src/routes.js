@@ -5,6 +5,7 @@ const { createPersonaCertificate, getPersonaCertificateList, getPersonaCertifica
 const { createPersonaContact, getPersonaContactList, updatePersonaContact, removePersonaContact, getPersonaContact } = require('./controllers/contacts');
 const { createPersonaExperience, getPersonaExperience, getPersonaExperienceList, updatePersonaExeperience, removePersonaExperience } = require('./controllers/experciences');
 const { createPersonaLanguage, updatePersonaLanguage, getPersonaLanguage, getPersonaLanguageList, removePersonaLanguage } = require('./controllers/languages');
+const { createMedia, updateMedia, getMediaList, getMedia, removeMedia } = require('./controllers/medias');
 const { getPersona, createPersona, updatePersona } = require('./controllers/persona');
 const { createPersonaProject, getPersonaProjectList, getPersonaProject, updatePersonaProject, removePersonaProject } = require('./controllers/projects');
 const { createPersonaSkill, getPersonaSkill, getPersonaSkillList, removePersonaSkill, updatePersonaSkill } = require('./controllers/skills');
@@ -66,5 +67,11 @@ router.get('/ad/:personaId', getPersonaADList);
 router.get('/ad/:personaId/:adId', getPersonaAD);
 router.put('/ad/:personaId/:adId', updatePersonaAD);
 router.delete('/ad/:personaId/:adId', removePersonaAD);
+
+router.post('/medias', createMedia);
+router.get('/medias/', getMediaList);
+router.get('/medias/:id', getMedia);
+router.put('/medias/:id', updateMedia);
+router.delete('/medias/:id', removeMedia);
 
 module.exports = router;
