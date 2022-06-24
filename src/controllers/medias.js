@@ -23,7 +23,7 @@ const createMedia = async (req, res) => {
             if (rowCount === 0) return res.status(500).json({ error: error500 });
         }
 
-        if (entitieName === 'academic_degress') {
+        if (entitieName === 'academic_degrees') {
             const { rowCount } = await knex(`${entitieName}_medias`).insert({ medias_id: newMedia[0].id, academic_degrees_id: entitieId });
             if (rowCount === 0) return res.status(500).json({ error: error500 });
         }

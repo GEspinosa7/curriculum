@@ -13,12 +13,12 @@ const createPersonaProject = async (req, res) => {
         if (persona.error) return res.status(404).json({ error: persona.error });
 
         const newProject = await knex('projects').insert({ title, p_description, activities }).returning('*');
-        if (!newProject[0]) return res.status(500).json({ error: error500 });
+        if (newProject.rowCount === 0) return res.status(500).json({ error: error500 });
 
-        const personaProjects = await knex('persona_projects').insert({ projects_id: newProject[0].id, persona_id: personaId }).returning('*');
-        if (!personaProjects[0]) return res.status(500).json({ error: error500 });
+        const { rowCount } = await knex('persona_projects').insert({ projects_id: newProject[0].id, persona_id: personaId }).returning('*');
+        if (rowCount === 0) return res.status(500).json({ error: error500 });
 
-        return res.status(201).json(personaProjects[0]);
+        return res.status(201).json(newProject[0]);
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
@@ -37,7 +37,7 @@ const updatePersonaProject = async (req, res) => {
         if (personaProject.error) return res.status(404).json({ error: personaProject.error });
 
         const updatedProject = await knex('projects').update(req.body).where({ id: personaProject.projects_id }).returning('*');
-        if (!updatedProject[0]) return res.status(500).json({ error: error500 });
+        if (updatedProject.rowCount === 0) return res.status(500).json({ error: error500 });
 
         return res.status(200).json(updatedProject[0]);
     } catch (error) {
@@ -55,7 +55,28 @@ const getPersonaProject = async (req, res) => {
         const project = await findEntitie('projects', projectId);
         if (project.error) return res.status(404).json({ error: project.error });
 
-        return res.status(200).json(project)
+        const projectMedias = await knex('projects_medias')
+            .join(
+                'medias',
+                'projects_medias.medias_id',
+                '=',
+                'medias.id')
+            .select(
+                'projects_medias.id',
+                'medias.link',
+                'medias.image_name'
+            ).groupBy(
+                'projects_medias.id',
+                'medias.link',
+                'medias.image_name'
+            ).where('projects_id', projectId);
+
+        const result = {
+            project,
+            medias: projectMedias
+        }
+
+        return res.status(200).json(result);
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
@@ -88,7 +109,25 @@ const getPersonaProjectList = async (req, res) => {
                 'projects.activities'
             ).where('persona_id', personaId);
 
-        if (!projects) return res.status(404).json({ error: error404('project list') });
+        for (let p of projects) {
+            const projectMedias = await knex('projects_medias')
+                .join(
+                    'medias',
+                    'projects_medias.medias_id',
+                    '=',
+                    'medias.id')
+                .select(
+                    'medias.id',
+                    'medias.link',
+                    'medias.image_name'
+                ).groupBy(
+                    'medias.id',
+                    'medias.link',
+                    'medias.image_name'
+                ).where('projects_id', p.id);
+
+            p.medias = projectMedias;
+        }
 
         return res.status(200).json(projects)
     } catch (error) {
