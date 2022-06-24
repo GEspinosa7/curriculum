@@ -12,16 +12,16 @@ const createPersonaCertificate = async (req, res) => {
     try {
         await schemaCreateCertificate.validate(req.body);
 
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const newCertificate = await knex('certificates').insert({ title, institution, issue_date, expiration_date, credential_key, credential_url }).returning('*');
-        if (!newCertificate[0]) return res.status(500).json({ error: error500 });
+        if (newCertificate.rowCount === 0) return res.status(500).json({ error: error500 });
 
         const getPersonaCertificate = await knex('persona_certificates').insert({ certificates_id: newCertificate[0].id, persona_id: personaId }).returning('*');
-        if (!getPersonaCertificate[0]) return res.status(500).json({ error: error500 });
+        if (getPersonaCertificate.rowCount === 0) return res.status(500).json({ error: error500 });
 
-        return res.status(201).json(getPersonaCertificate[0]);
+        return res.status(201).json(newCertificate[0]);
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
@@ -33,14 +33,14 @@ const updatePersonaCertificate = async (req, res) => {
     try {
         await schemaUpdateCertificate.validate(req.body);
 
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const personaCertificate = await findPersonaEntitie(personaId, 'certificates', certificateId);
         if (personaCertificate.error) return res.status(404).json({ error: personaCertificate.error });
 
         const updatedCertificate = await knex('certificates').update(req.body).where({ id: personaCertificate.certificates_id }).returning('*');
-        if (!updatedCertificate[0]) return res.status(500).json({ error: error500 });
+        if (updatedCertificate.rowCount === 0) return res.status(500).json({ error: error500 });
 
         return res.status(200).json(updatedCertificate[0]);
     } catch (error) {
@@ -52,8 +52,8 @@ const getPersonaCertificate = async (req, res) => {
     const { personaId, certificateId } = req.params;
 
     try {
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const contact = await findEntitie('certificates', certificateId);
         if (contact.error) return res.status(404).json({ error: contact.error });
@@ -68,8 +68,8 @@ const getPersonaCertificateList = async (req, res) => {
     const { personaId } = req.params;
 
     try {
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const certificates = await knex('persona_certificates')
             .join(
@@ -96,8 +96,6 @@ const getPersonaCertificateList = async (req, res) => {
                 'certificates.credential_key',
                 'certificates.credential_url'
             ).where('persona_id', personaId);
-
-        if (!certificates) return res.status(404).json({ error: error404('contact list') });
 
         return res.status(200).json(certificates)
     } catch (error) {

@@ -41,8 +41,8 @@ const updateMedia = async (req, res) => {
     try {
         await schemaUpdateMedia.validate({ imageName })
 
-        const media = await findEntitie('medias', id);
-        if (media.error) return res.status(404).json({ error: error404('Media') });
+        const { error } = await findEntitie('medias', id);
+        if (error) return res.status(404).json({ error });
 
         let columns = { image_name: imageName };
 
@@ -67,7 +67,7 @@ const getMedia = async (req, res) => {
 
     try {
         const media = await findEntitie('medias', id);
-        if (media.error) return res.status(404).json({ error: error404('Media') });
+        if (media.error) return res.status(404).json({ error: media.error });
 
         return res.status(200).json(media)
     } catch (error) {
@@ -89,8 +89,8 @@ const removeMedia = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const media = await findEntitie('medias', id);
-        if (media.error) return res.status(404).json({ error: media.error });
+        const { error } = await findEntitie('medias', id);
+        if (error) return res.status(404).json({ error });
 
         const projectMedia = await knex('projects_medias').where({ medias_id: id }).first();
         if (projectMedia) {

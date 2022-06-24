@@ -24,7 +24,7 @@ const createPersona = async (req, res) => {
         if (persona) return res.status(403).json({ error: error403 });
 
         const newPersona = await knex("persona").insert(req.body).returning('*');
-        if (!newPersona) return res.status(500).json({ error: error500 });
+        if (newPersona.rowCount === 0) return res.status(500).json({ error: error500 });
 
         return res.status(201).json(newPersona[0]);
     } catch (error) {
@@ -38,11 +38,11 @@ const updatePersona = async (req, res) => {
     try {
         await schemaUpdatePersona.validate(req.body);
 
-        const persona = await findEntitie('persona', id);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
-        const updatedPersona = await knex('persona').update(req.body).where({ id }).returning('*');
-        if (!updatedPersona[0]) return res.status(500).json({ error: error500 });
+        const { rowCount } = await knex('persona').update(req.body).where({ id }).returning('*');
+        if (rowCount === 0) return res.status(500).json({ error: error500 });
 
         return res.status(200).json();
     } catch (error) {

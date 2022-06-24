@@ -4,7 +4,7 @@ const { error404 } = require('./errors');
 let modifiedEntitieName = '';
 
 const findEntitie = async (entitieName, id) => {
-    modifiedEntitieName = entitieName !== 'persona' ? entitieName.substring(0, entitieName.length - 1) : entitieName;
+    modifiedEntitieName = entitieName !== 'persona' ? entitieName.substring(0, entitieName.length - 1).toLowerCase() : entitieName.toLowerCase();
 
     try {
         const result = await knex(`${entitieName}`).where({ id }).first();

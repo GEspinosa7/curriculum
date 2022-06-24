@@ -9,16 +9,16 @@ const createPersonaContact = async (req, res) => {
     try {
         await schemaCreateContact.validate(req.body);
 
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const newContact = await knex('contacts').insert({ title, link }).returning('*');
-        if (!newContact[0]) return res.status(500).json({ error: error500 });
+        if (newContact.rowCount === 0) return res.status(500).json({ error: error500 });
 
         const getPersonaContacts = await knex('persona_contacts').insert({ contacts_id: newContact[0].id, persona_id: personaId }).returning('*');
-        if (!getPersonaContacts[0]) return res.status(500).json({ error: error500 });
+        if (getPersonaContacts.rowCount === 0) return res.status(500).json({ error: error500 });
 
-        return res.status(201).json(getPersonaContacts[0]);
+        return res.status(201).json(newContact[0]);
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
@@ -30,14 +30,14 @@ const updatePersonaContact = async (req, res) => {
     try {
         await schemaUpdateContact.validate(req.body);
 
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const personaContact = await findPersonaEntitie(personaId, 'contacts', contactId);
         if (personaContact.error) return res.status(404).json({ error: personaContact.error });
 
         const updatedContact = await knex('contacts').update(req.body).where({ id: personaContact.contacts_id }).returning('*');
-        if (!updatedContact[0]) return res.status(500).json({ error: error500 });
+        if (updatedContact.rowCount === 0) return res.status(500).json({ error: error500 });
 
         return res.status(200).json(updatedContact[0]);
     } catch (error) {
@@ -49,8 +49,8 @@ const getPersonaContact = async (req, res) => {
     const { personaId, contactId } = req.params;
 
     try {
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const contact = await findEntitie('contacts', contactId);
         if (contact.error) return res.status(404).json({ error: contact.error });
@@ -65,8 +65,8 @@ const getPersonaContactList = async (req, res) => {
     const { personaId } = req.params;
 
     try {
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const contacts = await knex('persona_contacts')
             .join(
@@ -86,8 +86,6 @@ const getPersonaContactList = async (req, res) => {
                 'contacts.link'
             ).where('persona_id', personaId);
 
-        if (!contacts) return res.status(404).json({ error: error404('contact list') });
-
         return res.status(200).json(contacts)
     } catch (error) {
         return res.status(400).json({ error: error.message });
@@ -98,8 +96,8 @@ const removePersonaContact = async (req, res) => {
     const { personaId, contactId } = req.params;
 
     try {
-        const persona = await findEntitie('persona', personaId);
-        if (persona.error) return res.status(404).json({ error: persona.error });
+        const { error } = await findEntitie('persona', personaId);
+        if (error) return res.status(404).json({ error });
 
         const personaContact = await findPersonaEntitie(personaId, 'contacts', contactId);
         if (personaContact.error) return res.status(404).json({ error: personaContact.error });
