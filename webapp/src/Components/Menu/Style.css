@@ -1,0 +1,20 @@
+.menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    border: 1px solid #199BD3;
+    background-color: #199BD3;
+    border-radius: 0px 20px 0px 0px;
+    -webkit-border-radius: 0px 20px 0px 0px;
+    -moz-border-radius: 0px 20px 0px 0px;
+    width: 300px;
+    margin-top: 55px;
+}
+
+.menu_items {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

@@ -1,0 +1,42 @@
+.container_avatar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 25px;
+    margin-top: 50px;
+}
+
+.container_avatar p {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: large;
+}
+
+.avatar {
+    background-color: #FFFFFF;
+    border: 3px solid #199BD3;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    position: absolute;
+    top: 15px;
+}
+
+.avatar_ {
+    background-color: #FFFFFF;
+    border: 2px solid #199BD3;
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
