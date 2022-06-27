@@ -1,5 +1,5 @@
 .layout {
-    background-color: #FFFFFF;
+    background-color: var(--CustomPruple);
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -8,7 +8,6 @@
   
 
 .content {
-    border:1px solid  red;
     min-height: 100vh;
     margin-left: auto;
     width: 100%;

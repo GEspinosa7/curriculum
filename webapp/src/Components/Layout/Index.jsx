@@ -2,11 +2,11 @@ import "./Style.css";
 
 import Menu from "../Menu/Index";
 
-const Layout = () => {
+const Layout = ({ children }) => {
 	return (
 		<div className="layout">
 			<Menu />
-			<div className="content"></div>
+			<div className="content">{children}</div>
 		</div>
 	);
 };
