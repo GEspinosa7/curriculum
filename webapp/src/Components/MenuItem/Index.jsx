@@ -3,28 +3,20 @@ import { useState } from "react";
 import "./Style.css";
 
 const MenuItem = ({ Icon, title }) => {
-	const [style, setStyle] = useState({
-		color: "#FFFFFF",
-		backgroundColor: "",
-		fontWeight: 400,
-		cursor: "default",
-	});
+	const [style, setStyle] = useState({ color: "#FFFFFF" });
 
 	const handleMouseEvent = (e) => {
+		e.preventDefault();
+
 		if (e.type === "mouseenter") {
 			setStyle({
-				color: "#199BD3",
-				backgroundColor: "#FFFFFF",
+				color: "#FFFFFF",
+				backgroundColor: "#353253",
 				fontWeight: 700,
 				cursor: "pointer",
 			});
 		} else {
-			setStyle({
-				color: "#FFFFFF",
-				backgroundColor: "",
-				fontWeight: 400,
-				cursor: "default",
-			});
+			setStyle({ color: "#FFFFFF" });
 		}
 	};
 

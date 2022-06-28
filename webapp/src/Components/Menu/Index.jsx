@@ -1,7 +1,9 @@
+import "./Style.css";
+
+import CustomLink from "../CustomLink/Index";
+
 import Avatar from "../Avatar/Index";
 import MenuItem from "../MenuItem/Index";
-
-import "./Style.css";
 
 import AttributionOutlinedIcon from "@mui/icons-material/AttributionOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
@@ -17,13 +19,33 @@ const Menu = () => {
 			<Avatar></Avatar>
 
 			<div className="menu_items">
-				<MenuItem Icon={AttributionOutlinedIcon} title={"About"} />
-				<MenuItem Icon={ChatOutlinedIcon} title={"Languages"} />
-				<MenuItem Icon={MenuBookOutlinedIcon} title={"Academic Degrees"} />
-				<MenuItem Icon={BadgeOutlinedIcon} title={"Certificates"} />
-				<MenuItem Icon={CodeOutlinedIcon} title={"Skills"} />
-				<MenuItem Icon={WorkOutlineOutlinedIcon} title={"Experience"} />
-				<MenuItem Icon={DoneAllOutlinedIcon} title={"Projects"} />
+				<CustomLink to="/">
+					<MenuItem Icon={AttributionOutlinedIcon} title={"About"} path="/" />
+				</CustomLink>
+
+				<CustomLink to="/languages">
+					<MenuItem Icon={ChatOutlinedIcon} title={"Languages"} />
+				</CustomLink>
+
+				<CustomLink to="/ads">
+					<MenuItem Icon={MenuBookOutlinedIcon} title={"Academic Degrees"} />
+				</CustomLink>
+
+				<CustomLink to="/certificates">
+					<MenuItem Icon={BadgeOutlinedIcon} title={"Certificates"} />
+				</CustomLink>
+
+				<CustomLink to="/skills">
+					<MenuItem Icon={CodeOutlinedIcon} title={"Skills"} />
+				</CustomLink>
+
+				<CustomLink to="/experience">
+					<MenuItem Icon={WorkOutlineOutlinedIcon} title={"Experience"} />
+				</CustomLink>
+
+				<CustomLink to="/projects">
+					<MenuItem Icon={DoneAllOutlinedIcon} title={"Projects"} />
+				</CustomLink>
 			</div>
 		</aside>
 	);

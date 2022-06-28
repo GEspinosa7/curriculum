@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
-    border: 1px solid #199BD3;
-    background-color: #199BD3;
+    border: 1px solid #cf3358;
+    background-color: #cf3358;
     border-radius: 0px 20px 0px 0px;
     -webkit-border-radius: 0px 20px 0px 0px;
     -moz-border-radius: 0px 20px 0px 0px;
@@ -18,3 +18,9 @@
     flex-direction: column;
     justify-content: space-around;
 }
+
+.menu .menu_items .selected {
+    all: none;
+    background-color: var(--CustomPurple);
+    color: #FFFFFF;
+ }
