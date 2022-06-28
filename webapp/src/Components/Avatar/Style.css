@@ -16,7 +16,7 @@
 
 .avatar {
     background-color: #FFFFFF;
-    border: 3px solid #199BD3;
+    border: 3px solid var(--CustomRed);
     border-radius: 100%;
     width: 80px;
     height: 80px;
@@ -30,7 +30,7 @@
 
 .avatar_ {
     background-color: #FFFFFF;
-    border: 2px solid #199BD3;
+    /* border: 2px solid var(--CustomRed); */
     border-radius: 100%;
     width: 70px;
     height: 70px;
@@ -40,3 +40,9 @@
     align-self: center;
 }
 
+.avatar_ img {
+    max-width: 68px;
+    max-height: 68px; 
+    border-radius: 100%;
+    border: 2px solid var(--CustomRed);
+}
