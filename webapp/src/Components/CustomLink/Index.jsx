@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 const CustomLink = ({ children, to, ...props }) => {
@@ -5,7 +7,7 @@ const CustomLink = ({ children, to, ...props }) => {
 	let match = useMatch({ path: resolved.pathname, end: true });
 
 	const enableStyle = {
-		backgroundColor: "#353253",
+		backgroundColor: "#0B111D",
 		fontWeight: 700,
 		borderRadius: "50px 0px 0px 50px",
 		width: "100%",

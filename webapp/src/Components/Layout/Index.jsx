@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./Style.css";
 
 import Menu from "../Menu/Index";

@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./Style.css";
 
 import CustomLink from "../CustomLink/Index";
@@ -21,10 +23,6 @@ const Menu = () => {
 			<div className="menu_items">
 				<CustomLink to="/">
 					<MenuItem Icon={AttributionOutlinedIcon} title={"About"} path="/" />
-				</CustomLink>
-
-				<CustomLink to="/languages">
-					<MenuItem Icon={ChatOutlinedIcon} title={"Languages"} />
 				</CustomLink>
 
 				<CustomLink to="/ads">

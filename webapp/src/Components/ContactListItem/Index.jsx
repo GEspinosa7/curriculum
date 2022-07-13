@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useState } from "react";
 
 const ContactListItem = ({ Icon }) => {
@@ -9,7 +11,7 @@ const ContactListItem = ({ Icon }) => {
 	const handleMouseEvent = (e) => {
 		if (e.type === "mouseenter") {
 			setStyle({
-				color: "#cf3358",
+				color: "#8e31ff",
 				cursor: "pointer",
 			});
 		} else {

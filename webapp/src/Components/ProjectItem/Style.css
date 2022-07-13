@@ -1,0 +1,124 @@
+
+.project_link {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  margin: 10px;
+}
+
+.container_project_link{
+  display:table-cell;
+  width:250px;
+  height:250px;
+  background-size:cover;
+  overflow: hidden;
+  position: relative;
+  background-image: url("https://th.bing.com/th/id/R.96f4799e78bbc5d3c2c54fad0bab73ce?rik=bYl2hAJtayyQ1A&pid=ImgRaw&r=0");
+  border-radius: 30px;
+}
+
+.container_project_link .project_link_shadow{
+  background-color: var(--CustomBlack);
+  position: absolute;
+  z-index: 1000;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  border-radius: 30px;
+}
+
+.container_project_link:hover .project_link_shadow{
+    background-color:var(--CustomBlack);
+    cursor: pointer;
+}
+.container_project_link .title_container{
+  position: absolute;
+  padding: 7px;
+  z-index: 1000;
+  top:60%;
+  left:-80%;
+  color:var(--OffWhite);
+  font-size: 13px;
+  width: 80%;
+  -webkit-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  -ms-transition: all 0.7s;
+  transition: all 0.7s;
+  border-radius: 30px;
+
+}
+
+.container_project_link .desc_container{
+  position: absolute;
+  padding: 5px;
+  z-index: 1000;
+  top:70%;
+  right:-85%;
+  margin-top: 25px;
+  color: var(--OffWhite);
+  font-size: 11px;
+  width: 80%;
+  -webkit-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  -ms-transition: all 0.7s;
+  transition: all 0.7s;
+  border-radius: 30px;
+}
+
+.activities {
+  width: 60%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: center;
+  flex-direction: column;
+  border-radius: 30px;
+  background-color:var(--CustomBlack);
+}
+
+.activities .act_project_title {
+  font-size: 16px;
+  -webkit-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  -ms-transition: all 0.7s;
+  transition: all 0.7s;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.activities .act_activities_desc {
+  min-width: 88%;
+  max-width: 90%;
+  height: 200px;
+  max-height: 200px;
+  -webkit-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  -ms-transition: all 0.7s;
+  transition: all 0.7s;
+  color: transparent;
+  overflow: hidden;
+  margin-top: 10px;
+  padding: 20px;
+}
+
+.project_link:hover .title_container{
+  background-color:var(--CustomPurple2);
+  left:0px;
+}
+
+.project_link:hover .desc_container{
+  background-color:var(--CustomPurple3);
+  right:0px;
+}
+
+.project_link:hover .act_project_title{
+  background-color:var(--CustomPurple3);
+}
+
+.project_link:hover .act_activities_desc{
+  color: var(--OffWhite);
+  overflow: auto;
+}

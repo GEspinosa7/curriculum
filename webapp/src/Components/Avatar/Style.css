@@ -9,14 +9,14 @@
 }
 
 .container_avatar p {
-    color: #FFFFFF;
+    color: var(--OffWhite);
     font-weight: 700;
     font-size: large;
 }
 
 .avatar {
-    background-color: #FFFFFF;
-    border: 3px solid var(--CustomRed);
+    background-color: var(--CustomPurple3);
+    border: 3px solid var(--CustomPurple2);
     border-radius: 100%;
     width: 80px;
     height: 80px;
@@ -29,8 +29,8 @@
 }
 
 .avatar_ {
-    background-color: #FFFFFF;
-    /* border: 2px solid var(--CustomRed); */
+    background-color: var(--CustomPurple2);
+    border: 2px solid var(--CustomPurple3);
     border-radius: 100%;
     width: 70px;
     height: 70px;
@@ -44,5 +44,5 @@
     max-width: 68px;
     max-height: 68px; 
     border-radius: 100%;
-    border: 2px solid var(--CustomRed);
+    border: 1px solid var(--CustomPurple2);
 }
