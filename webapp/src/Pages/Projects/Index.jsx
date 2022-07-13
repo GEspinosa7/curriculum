@@ -7,6 +7,7 @@ import Layout from "../../Components/Layout/Index";
 import ProjectItem from "../../Components/ProjectItem/Index";
 import CustomBackDrop from "../../Components/Backdrop/Index";
 import CustomSnackBar from "../../Components/CustomSnackBar/Index";
+import getFullUrl from "../../Utilities/getUrl";
 
 const Projects = () => {
 	const [projects, setProjects] = useState([]);
@@ -18,7 +19,7 @@ const Projects = () => {
 		setOpenBackDrop(true);
 
 		try {
-			const resp = await fetch(`http://localhost:8000/projects/1`, {
+			const resp = await fetch(getFullUrl("/projects/1"), {
 				method: "GET",
 			});
 

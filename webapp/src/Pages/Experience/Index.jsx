@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Layout from "../../Components/Layout/Index";
 import CustomBackDrop from "../../Components/Backdrop/Index";
 import CustomSnackBar from "../../Components/CustomSnackBar/Index";
+import getFullUrl from "../../Utilities/getUrl";
 
 const Experience = () => {
 	const [exp, setExp] = useState([]);
@@ -15,7 +16,7 @@ const Experience = () => {
 		setOpenBackDrop(true);
 
 		try {
-			const resp = await fetch(`http://localhost:8000/experiences/1`, {
+			const resp = await fetch(getFullUrl("/experiences/1"), {
 				method: "GET",
 			});
 

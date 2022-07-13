@@ -7,6 +7,8 @@ import Layout from "../../Components/Layout/Index";
 import CustomBackDrop from "../../Components/Backdrop/Index";
 import CustomSnackBar from "../../Components/CustomSnackBar/Index";
 
+import getFullUrl from "../../Utilities/getUrl";
+
 const Certificates = () => {
 	const [certificates, setCertificates] = useState([]);
 	const [openBackDrop, setOpenBackDrop] = useState(false);
@@ -17,7 +19,7 @@ const Certificates = () => {
 		setOpenBackDrop(true);
 
 		try {
-			const resp = await fetch(`http://localhost:8000/certificates/1`, {
+			const resp = await fetch(getFullUrl("/certificates/1"), {
 				method: "GET",
 			});
 

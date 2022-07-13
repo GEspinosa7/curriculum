@@ -8,6 +8,7 @@ import CustomBackDrop from "../../Components/Backdrop/Index";
 import CustomSnackBar from "../../Components/CustomSnackBar/Index";
 
 import { formatDate } from "../../Utilities/handleDates";
+import getFullUrl from "../../Utilities/getUrl";
 
 const AcademicDegrees = () => {
 	const [ads, setAds] = useState([]);
@@ -19,7 +20,7 @@ const AcademicDegrees = () => {
 		setOpenBackDrop(true);
 
 		try {
-			const resp = await fetch(`http://localhost:8000/ad/1`, {
+			const resp = await fetch(getFullUrl("/ad/1"), {
 				method: "GET",
 			});
 

@@ -7,6 +7,8 @@ import Layout from "../../Components/Layout/Index";
 import CustomBackDrop from "../../Components/Backdrop/Index";
 import CustomSnackBar from "../../Components/CustomSnackBar/Index";
 
+import getFullUrl from "../../Utilities/getUrl";
+
 const Skills = () => {
 	const [skills, setSkills] = useState([]);
 	const [languages, setLanguages] = useState([]);
@@ -18,7 +20,7 @@ const Skills = () => {
 		setOpenBackDrop(true);
 
 		try {
-			const skills = await fetch(`http://localhost:8000/skills/1`, {
+			const skills = await fetch(getFullUrl("/skills/1"), {
 				method: "GET",
 			});
 
@@ -31,7 +33,7 @@ const Skills = () => {
 		}
 
 		try {
-			const languages = await fetch(`http://localhost:8000/languages/1`, {
+			const languages = await fetch(getFullUrl("/languages/1"), {
 				method: "GET",
 			});
 

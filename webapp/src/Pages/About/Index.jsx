@@ -13,6 +13,7 @@ import CustomSnackBar from "../../Components/CustomSnackBar/Index";
 import "./Style.css";
 
 import { calculateAge } from "../../Utilities/handleDates";
+import getFullUrl from "../../Utilities/getUrl";
 
 const About = () => {
 	const [persona, setPersona] = useState({});
@@ -24,7 +25,7 @@ const About = () => {
 		setOpenBackDrop(true);
 
 		try {
-			const resp = await fetch(`http://localhost:8000/persona/1`, {
+			const resp = await fetch(getFullUrl("/persona/1"), {
 				method: "GET",
 			});
 
