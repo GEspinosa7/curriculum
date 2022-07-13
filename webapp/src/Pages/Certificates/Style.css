@@ -1,0 +1,41 @@
+.cer_container {
+    background-color: var(--CustomPurple2);
+    min-width: 600px;
+    min-height: 400px;
+    max-width: 750px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+.cer_item{
+    color: var(--OffWhite);
+    border-bottom: 1px solid var(--OffWhite);
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cer_details {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cer_item .button {
+    margin-right: 20px;
+}
+
+.cer_details span {
+    color: var(--CustomPurple3);
+    margin-right: 10px;
+}
