@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
     BrowserRouter,
     Routes,
@@ -5,7 +7,6 @@ import {
 } from "react-router-dom";
 
 import About from "./Pages/About/Index";
-import Languages from "./Pages/Languages/Index";
 import AcademicDegrees from "./Pages/ADs/Index";
 import Certificates from "./Pages/Certificates/Index";
 import Skills from "./Pages/Skills/Index";
@@ -17,7 +18,6 @@ const CustomRoutes = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<About />} />
-                <Route path="/languages" element={<Languages />} />
                 <Route path="/ads" element={<AcademicDegrees />} />
                 <Route path="/certificates" element={<Certificates />} />
                 <Route path="/skills" element={<Skills />} />
