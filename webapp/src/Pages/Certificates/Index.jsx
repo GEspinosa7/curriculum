@@ -4,45 +4,66 @@ import { useState, useEffect } from "react";
 import "./Style.css";
 
 import Layout from "../../Components/Layout/Index";
+import CustomBackDrop from "../../Components/Backdrop/Index";
+import CustomSnackBar from "../../Components/CustomSnackBar/Index";
 
 const Certificates = () => {
 	const [certificates, setCertificates] = useState([]);
+	const [openBackDrop, setOpenBackDrop] = useState(false);
+	const [error, setError] = useState("");
 
-	const handleGetADs = async () => {
-		const resp = await fetch(`http://localhost:8000/certificates/1`, {
-			method: "GET",
-		});
+	const handleGetCertificates = async () => {
+		setError("");
+		setOpenBackDrop(true);
 
-		const data = await resp.json();
-		setCertificates(data);
+		try {
+			const resp = await fetch(`http://localhost:8000/certificates/1`, {
+				method: "GET",
+			});
+
+			const data = await resp.json();
+			setOpenBackDrop(false);
+
+			setCertificates(data);
+		} catch (error) {
+			setOpenBackDrop(false);
+			setError(error.message);
+			return;
+		}
 	};
 
 	useEffect(() => {
-		handleGetADs();
+		handleGetCertificates();
 	}, []);
 
 	return (
 		<Layout>
 			<div className="cer_container">
-				{certificates.map((c) => (
-					<div className="cer_item">
-						<div className="cer_details">
-							<p>{c.title}</p>
-							<p>{c.institution}</p>
-							<p>{c.issue_date}</p>
-							<p>{c.expiration_date}</p>
-							<p>
-								{" "}
-								<span>Credential Key: </span>
-								{c.credential_key}
-							</p>
+				{certificates.length > 0 ? (
+					certificates.map((c) => (
+						<div className="cer_item">
+							<div className="cer_details">
+								<p>{c.title}</p>
+								<p>{c.institution}</p>
+								<p>{c.issue_date}</p>
+								<p>{c.expiration_date}</p>
+								<p>
+									{" "}
+									<span>Credential Key: </span>
+									{c.credential_key}
+								</p>
+							</div>
+							<a href={c.credential_url} target={"_blank"} className="button">
+								Check Credential
+							</a>
 						</div>
-						<a href={c.credential_url} target={"_blank"} className="button">
-							Check Credential
-						</a>
-					</div>
-				))}
+					))
+				) : (
+					<div className="no_content">...</div>
+				)}
 			</div>
+			<CustomBackDrop open={openBackDrop} />
+			{error && <CustomSnackBar error={error} />}
 		</Layout>
 	);
 };
