@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -9,10 +10,24 @@ import ContactListItem from "../../Components/ContactListItem/Index";
 
 import "./Style.css";
 
-const lorem =
-	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+import { calculateAge } from "../../Utilities/handleDates";
 
 const About = () => {
+	const [persona, setPersona] = useState({});
+
+	const handleGetPersonaInfo = async () => {
+		const resp = await fetch(`http://localhost:8000/persona/1`, {
+			method: "GET",
+		});
+
+		const data = await resp.json();
+		setPersona(data);
+	};
+
+	useEffect(() => {
+		handleGetPersonaInfo();
+	}, []);
+
 	return (
 		<Layout>
 			<div className="flex about_container">
@@ -24,12 +39,17 @@ const About = () => {
 					/>
 				</div>
 				<div className="about_content">
-					<p className="ac_title">
-						<span>Full Name</span> - Age
-					</p>
-					<span className="ac_job">Job</span>
-					<p className="ac_location">City - Country</p>
-					<p className="ac_descrition">{lorem}</p>
+					<div className="flex about_details">
+						<h3 className="ac_title">
+							<span>{persona.p_name}</span> - {calculateAge(persona.birthday)}{" "}
+							anos
+						</h3>
+						<span className="ac_job">{persona.job}</span>
+						<p className="ac_location">
+							{persona.city} - {persona.country}
+						</p>
+					</div>
+					<div className="ac_description">{persona.about}</div>
 				</div>
 				<div className="about_contact_list">
 					<ContactListItem Icon={MailOutlineIcon} />

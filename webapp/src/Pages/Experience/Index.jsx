@@ -1,38 +1,25 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 import "./Style.css";
 
 import Layout from "../../Components/Layout/Index";
 
 const Experience = () => {
-	const exp = [
-		{
-			id: 1,
-			title: "experience",
-			company: "fodase",
-			company_city: "cidade",
-			company_country: "país",
-			is_current_job: true,
-			ex_start_date: "20/05/2020",
-			ex_end_date: "22/06/2022",
-			ex_description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet, augue nec laoreet efficitur, eros mi dignissim lacus, at pretium dui nunc ac justo. Duis molestie lacinia lacus vitae dignissim. Quisque diam tellus, finibus ac dolor id, dictum fringilla arcu. Praesent sed finibus justo, ut varius dolor. Cras scelerisque eros dui, cursus consequat urna mattis a. Suspendisse potenti. Curabitur porttitor ornare ante. Mauris ultrices nibh in convallis consectetur.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet, augue nec laoreet efficitur, eros mi dignissim lacus, at pretium dui nunc ac justo. Duis molestie lacinia lacus vitae dignissim. Quisque diam tellus, finibus ac dolor id, dictum fringilla arcu. Praesent sed finibus justo, ut varius dolor. Cras scelerisque eros dui, cursus conse",
-			job_type: "integral",
-		},
-		{
-			id: 2,
-			title: "experience",
-			company: "fodase",
-			company_city: "cidade",
-			company_country: "país",
-			is_current_job: true,
-			ex_start_date: "20/05/2020",
-			ex_end_date: "22/06/2022",
-			ex_description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet, augue nec laoreet efficitur, eros mi dignissim lacus, at pretium dui nunc ac justo. Duis molestie lacinia lacus vitae dignissim. Quisque diam tellus, finibus ac dolor id, dictum fringilla arcu. Praesent sed finibus justo, ut varius dolor. Cras scelerisque eros dui, cursus consequat urna mattis a. Suspendisse potenti. Curabitur porttitor ornare ante. Mauris ultrices nibh in convallis consectetur.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet, augue nec laoreet efficitur, eros mi dignissim lacus, at pretium dui nunc ac justo. Duis molestie lacinia lacus vitae dignissim. Quisque diam tellus, finibus ac dolor id, dictum fringilla arcu. Praesent sed finibus justo, ut varius dolor. Cras scelerisque eros dui, cursus conse",
-			job_type: "integral",
-		},
-	];
+	const [exp, setExp] = useState([]);
+
+	const handleGetADs = async () => {
+		const resp = await fetch(`http://localhost:8000/experiences/1`, {
+			method: "GET",
+		});
+
+		const data = await resp.json();
+		setExp(data);
+	};
+
+	useEffect(() => {
+		handleGetADs();
+	}, []);
 
 	return (
 		<Layout>

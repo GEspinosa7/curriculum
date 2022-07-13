@@ -1,67 +1,36 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 import "./Style.css";
 
 import Layout from "../../Components/Layout/Index";
 
 const Skills = () => {
-	const skills = [
-		{
-			id: 1,
-			title: "Skill",
-			img:
-				"https://th.bing.com/th/id/OIP.xQJlilCdJ7U2ebPvc8DYLwHaIJ?pid=ImgDet&rs=1",
-		},
-		{
-			id: 2,
-			title: "Skill2",
-			img:
-				"https://th.bing.com/th/id/OIP.xQJlilCdJ7U2ebPvc8DYLwHaIJ?pid=ImgDet&rs=1",
-		},
-		{
-			id: 3,
-			title: "Skill3",
-			img:
-				"https://th.bing.com/th/id/OIP.xQJlilCdJ7U2ebPvc8DYLwHaIJ?pid=ImgDet&rs=1",
-		},
-		{
-			id: 3,
-			title: "Skill3",
-			img:
-				"https://th.bing.com/th/id/OIP.xQJlilCdJ7U2ebPvc8DYLwHaIJ?pid=ImgDet&rs=1",
-		},
-		{
-			id: 3,
-			title: "Skill3",
-			img:
-				"https://th.bing.com/th/id/OIP.xQJlilCdJ7U2ebPvc8DYLwHaIJ?pid=ImgDet&rs=1",
-		},
-		{
-			id: 3,
-			title: "Skill3",
-			img:
-				"https://th.bing.com/th/id/OIP.xQJlilCdJ7U2ebPvc8DYLwHaIJ?pid=ImgDet&rs=1",
-		},
-		{
-			id: 3,
-			title: "Skill3",
-			img:
-				"https://th.bing.com/th/id/OIP.xQJlilCdJ7U2ebPvc8DYLwHaIJ?pid=ImgDet&rs=1",
-		},
-	];
+	const [skills, setSkills] = useState([]);
+	const [languages, setLanguages] = useState([]);
 
-	const languages = [
-		{
-			id: 1,
-			title: "Language",
-			fluency: "native",
-		},
-		{
-			id: 2,
-			title: "Language",
-			fluency: "native",
-		},
-	];
+	const handleGetSkills = async () => {
+		const resp = await fetch(`http://localhost:8000/skills/1`, {
+			method: "GET",
+		});
+
+		const data = await resp.json();
+		setSkills(data);
+	};
+
+	const handleGetLanguages = async () => {
+		const resp = await fetch(`http://localhost:8000/languages/1`, {
+			method: "GET",
+		});
+
+		const data = await resp.json();
+		setLanguages(data);
+	};
+
+	useEffect(() => {
+		handleGetSkills();
+		handleGetLanguages();
+	}, []);
 
 	return (
 		<Layout>
@@ -69,7 +38,7 @@ const Skills = () => {
 				<div className="skills">
 					{skills.map((s) => (
 						<div className="skill flex" key={s.id}>
-							<img src={s.img} alt={s.title} />
+							{/* <img src={s.img} alt={s.title} /> */}
 							<p>{s.title}</p>
 						</div>
 					))}

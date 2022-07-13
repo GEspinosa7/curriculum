@@ -1,66 +1,26 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 import "./Style.css";
 
 import Layout from "../../Components/Layout/Index";
 
 const Certificates = () => {
-	const certificates = [
-		{
-			id: 1,
-			title: "teste",
-			institution: "alura",
-			issue_date: "05-08-2020",
-			expiration_date: null,
-			credential_key: "asfsdgsegsdfg",
-			credential_url: "link.com/asfsdgsegsdfg",
-		},
-		{
-			id: 2,
-			title: "teste",
-			institution: "alura",
-			issue_date: "05-08-2020",
-			expiration_date: null,
-			credential_key: "asfsdgsegsdfg",
-			credential_url: "link.com/asfsdgsegsdfg",
-		},
-		{
-			id: 3,
-			title: "teste",
-			institution: "alura",
-			issue_date: "05-08-2020",
-			expiration_date: null,
-			credential_key: "asfsdgsegsdfg",
-			credential_url: "link.com/asfsdgsegsdfg",
-		},
-		{
-			id: 4,
-			title: "teste",
-			institution: "alura",
-			issue_date: "05-08-2020",
-			expiration_date: null,
-			credential_key: "asfsdgsegsdfg",
-			credential_url: "link.com/asfsdgsegsdfg",
-		},
-		{
-			id: 5,
-			title: "teste",
-			institution: "alura",
-			issue_date: "05-08-2020",
-			expiration_date: null,
-			credential_key: "asfsdgsegsdfg",
-			credential_url: "link.com/asfsdgsegsdfg",
-		},
-		{
-			id: 6,
-			title: "teste",
-			institution: "alura",
-			issue_date: "05-08-2020",
-			expiration_date: null,
-			credential_key: "asfsdgsegsdfg",
-			credential_url: "link.com/asfsdgsegsdfg",
-		},
-	];
+	const [certificates, setCertificates] = useState([]);
+
+	const handleGetADs = async () => {
+		const resp = await fetch(`http://localhost:8000/certificates/1`, {
+			method: "GET",
+		});
+
+		const data = await resp.json();
+		setCertificates(data);
+	};
+
+	useEffect(() => {
+		handleGetADs();
+	}, []);
+
 	return (
 		<Layout>
 			<div className="cer_container">
