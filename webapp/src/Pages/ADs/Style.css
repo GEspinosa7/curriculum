@@ -1,0 +1,49 @@
+.ad_container {
+    background-color: var(--CustomPurple2);
+    color: #FFFFFF;
+    min-width: 400px;
+    max-width: 550px;
+    min-height: 80%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    padding: 15px;
+    overflow: auto;
+    gap: 10px;
+}
+
+.ad_item {
+    max-height: 100%;
+    width: 80%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-bottom: 3px dotted var(--CustomPurple);
+    gap: 10px;
+    padding: 15px;
+}
+
+.ad_item .ad_desc {
+    max-height: 100%;
+    overflow: auto;
+}
+
+.ad_details {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    font-weight: 700;
+    gap: 10px;
+}
+
+.ad_details span {
+    color: var(--CustomPurple3);
+    margin-right: 10px;
+}
