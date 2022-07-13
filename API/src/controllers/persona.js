@@ -38,7 +38,7 @@ const updatePersona = async (req, res) => {
     try {
         await schemaUpdatePersona.validate(req.body);
 
-        const { error } = await findEntitie('persona', personaId);
+        const { error } = await findEntitie('persona', id);
         if (error) return res.status(404).json({ error });
 
         const { rowCount } = await knex('persona').update(req.body).where({ id }).returning('*');
