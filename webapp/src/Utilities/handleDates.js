@@ -1,4 +1,4 @@
-import moment from "moment";
+import { format } from 'date-fns'
 
 const calculateAge = (birthday) => {
     const ageDifMs = Date.now() - new Date(birthday).getTime();
@@ -7,7 +7,9 @@ const calculateAge = (birthday) => {
 }
 
 const formatDate = (d) => {
-    return d.slice(0, d.indexOf("T"));
+    const date = new Date(d);
+
+    return format(date, "MMM / yyyy");
 }
 
 export { calculateAge, formatDate };

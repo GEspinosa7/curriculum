@@ -8,6 +8,7 @@ import CustomBackDrop from "../../Components/Backdrop/Index";
 import CustomSnackBar from "../../Components/CustomSnackBar/Index";
 
 import getFullUrl from "../../Utilities/getUrl";
+import { formatDate } from "../../Utilities/handleDates";
 
 const Certificates = () => {
 	const [certificates, setCertificates] = useState([]);
@@ -47,8 +48,8 @@ const Certificates = () => {
 							<div className="cer_details">
 								<p>{c.title}</p>
 								<p>{c.institution}</p>
-								<p>{c.issue_date}</p>
-								<p>{c.expiration_date}</p>
+								<p>{formatDate(c.issue_date)}</p>
+								<p>{formatDate(c.expiration_date)}</p>
 								<p>
 									{" "}
 									<span>Credential Key: </span>

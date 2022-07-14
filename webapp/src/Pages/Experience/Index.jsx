@@ -5,6 +5,7 @@ import Layout from "../../Components/Layout/Index";
 import CustomBackDrop from "../../Components/Backdrop/Index";
 import CustomSnackBar from "../../Components/CustomSnackBar/Index";
 import getFullUrl from "../../Utilities/getUrl";
+import { formatDate } from "../../Utilities/handleDates";
 
 const Experience = () => {
 	const [exp, setExp] = useState([]);
@@ -49,7 +50,7 @@ const Experience = () => {
 								</p>
 
 								<p>
-									{e.ex_start_date} - {e.ex_end_date}
+									{formatDate(e.ex_start_date)} - {formatDate(e.ex_end_date)}
 								</p>
 							</div>
 							<p>{e.ex_description}</p>
