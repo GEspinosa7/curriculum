@@ -39,18 +39,6 @@
     color: var(--OffWhite);
 }
 
-.about_contact_list {
-    min-height: 400px;
-    min-width: 35px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-left:30px;
-    background-color: var(--CustomPurple2);
-    border-radius: 30px;
-}
-
 .about_content span {
     color: var(--CustomPurple3);
     font-weight: 700;
@@ -63,7 +51,7 @@
     max-height: 200px;
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 30px 0px 0px 30px;
+    border-radius: 30px 5px 5px 30px;
     overflow: auto;
 }
 

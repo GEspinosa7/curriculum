@@ -1,12 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import GitHubIcon from "@mui/icons-material/GitHub";
-
 import Layout from "../../Components/Layout/Index";
-import ContactListItem from "../../Components/ContactListItem/Index";
+import ContactList from "../../Components/ContactList/Index";
 import CustomBackDrop from "../../Components/Backdrop/Index";
 import CustomSnackBar from "../../Components/CustomSnackBar/Index";
 
@@ -30,8 +26,8 @@ const About = () => {
 			});
 
 			const data = await resp.json();
-			setOpenBackDrop(false);
 
+			setOpenBackDrop(false);
 			setPersona(data);
 		} catch (error) {
 			setOpenBackDrop(false);
@@ -70,11 +66,8 @@ const About = () => {
 							<div className="ac_description">{persona.about}</div>
 						</>
 					</div>
-					<div className="about_contact_list">
-						<ContactListItem Icon={MailOutlineIcon} />
-						<ContactListItem Icon={LinkedInIcon} />
-						<ContactListItem Icon={GitHubIcon} />
-					</div>
+
+					<ContactList />
 				</div>
 			) : (
 				<div className="no_content">...</div>

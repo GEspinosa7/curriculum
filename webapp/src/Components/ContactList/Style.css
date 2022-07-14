@@ -1,0 +1,11 @@
+.contact_list {
+    min-height: 400px;
+    min-width: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-left:30px;
+    background-color: var(--CustomPurple2);
+    border-radius: 30px;
+}
